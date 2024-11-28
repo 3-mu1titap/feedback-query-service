@@ -1,1 +1,23 @@
-spring.application.name=feedback-query
+server:
+  port: 8086
+
+spring:
+  application:
+    name: feedback-query-service
+  data:
+    mongodb:
+      uri: mongodb+srv://tnbin98:1q2w3e4r@subin.elho5.mongodb.net/member-query?retryWrites=true&w=majority
+
+  kafka:
+    bootstrap-servers: localhost:9092 # Kafka 브로커 주소
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer # JSON 대신 String으로 지정
+
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
