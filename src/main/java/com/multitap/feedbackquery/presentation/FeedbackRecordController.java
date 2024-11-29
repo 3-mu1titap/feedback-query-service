@@ -30,6 +30,8 @@ public class FeedbackRecordController {
                 .map(FeedbackRecordResponseDto::toVo)
                 .toList();
 
+
+
         return new BaseResponse<>(feedbackRecordResponseVoList);
     }
 }

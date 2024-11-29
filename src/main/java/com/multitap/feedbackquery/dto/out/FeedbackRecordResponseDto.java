@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 @Getter
 @NoArgsConstructor
@@ -40,7 +43,7 @@ public class FeedbackRecordResponseDto {
         return FeedbackRecordResponseDto.builder()
                 .mentorNickName(feedbackScoreRequestDto.getMentorNickName())
                 .mentoringSessionUuid(feedbackScoreRequestDto.getMentoringSessionUuid())
-                .mentoringDate(feedbackScoreRequestDto.getMentoringDate())
+                .mentoringDate(formatDate(feedbackScoreRequestDto.getMentoringDate()))
                 .categoryCode(feedbackScoreRequestDto.getCategoryCode())
                 .element1(feedbackScoreRequestDto.getElement1())
                 .element2(feedbackScoreRequestDto.getElement2())
@@ -51,21 +54,25 @@ public class FeedbackRecordResponseDto {
                 .build();
     }
 
-    public static FeedbackRecordResponseVo toVo(FeedbackRecordResponseDto feedbackRecordResponseDto){
+    public static FeedbackRecordResponseVo toVo(FeedbackRecordResponseDto feedbackRecordResponseDto) {
         return FeedbackRecordResponseVo.builder()
-               .mentorNickName(feedbackRecordResponseDto.getMentorNickName())
-               .mentoringSessionUuid(feedbackRecordResponseDto.getMentoringSessionUuid())
-               .mentoringDate(feedbackRecordResponseDto.getMentoringDate())
-               .categoryCode(feedbackRecordResponseDto.getCategoryCode())
-               .element1(feedbackRecordResponseDto.getElement1())
-               .element2(feedbackRecordResponseDto.getElement2())
-               .element3(feedbackRecordResponseDto.getElement3())
-               .element4(feedbackRecordResponseDto.getElement4())
-               .element5(feedbackRecordResponseDto.getElement5())
-               .content(feedbackRecordResponseDto.getContent())
-               .build();
+                .mentorNickName(feedbackRecordResponseDto.getMentorNickName())
+                .mentoringSessionUuid(feedbackRecordResponseDto.getMentoringSessionUuid())
+                .mentoringDate(feedbackRecordResponseDto.getMentoringDate())
+                .categoryCode(feedbackRecordResponseDto.getCategoryCode())
+                .element1(feedbackRecordResponseDto.getElement1())
+                .element2(feedbackRecordResponseDto.getElement2())
+                .element3(feedbackRecordResponseDto.getElement3())
+                .element4(feedbackRecordResponseDto.getElement4())
+                .element5(feedbackRecordResponseDto.getElement5())
+                .content(feedbackRecordResponseDto.getContent())
+                .build();
     }
 
+    private static String formatDate(LocalDateTime mentoringDate) {
+        return mentoringDate != null ? mentoringDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
     }
+
+}
 
 

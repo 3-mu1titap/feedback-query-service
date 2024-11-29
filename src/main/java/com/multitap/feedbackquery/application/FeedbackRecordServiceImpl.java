@@ -20,12 +20,13 @@ public class FeedbackRecordServiceImpl implements FeedbackRecordService {
     @Override
     public List<FeedbackRecordResponseDto> getFeedbackScore(FeedbackRecordRequestDto feedbackRecordRequestDto) {
 
-        return feedbackRecordRepository.findById(feedbackRecordRequestDto.getUuid())
+        return feedbackRecordRepository.findByIdAndCategoryCodeOrderByMentoringDateDesc(feedbackRecordRequestDto.getUuid(), feedbackRecordRequestDto.getCategoryCode())
                 .map(FeedbackRecord::getFeedbackScore)
+                .orElse(List.of())
                 .stream()
-                .flatMap(List::stream)
-                .filter(score -> score.getCategoryCode().equals(feedbackRecordRequestDto.getCategoryCode()))
                 .map(FeedbackRecordResponseDto::from)
                 .toList();
     }
 }
+
+

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class FeedbackScoreRequestDto {
     private String mentorNickName;
     private String mentoringSessionUuid;
-    private String mentoringDate;
+    private LocalDateTime mentoringDate;
 
     @Indexed
     private String categoryCode;
@@ -29,7 +30,7 @@ public class FeedbackScoreRequestDto {
 
 
     @Builder
-    public FeedbackScoreRequestDto(String mentorNickName, String mentoringSessionUuid, String mentoringDate, String categoryCode, Integer element1, Integer element2, Integer element3, Integer element4, Integer element5, String content) {
+    public FeedbackScoreRequestDto(String mentorNickName, String mentoringSessionUuid, LocalDateTime mentoringDate, String categoryCode, Integer element1, Integer element2, Integer element3, Integer element4, Integer element5, String content) {
         this.mentorNickName = mentorNickName;
         this.mentoringSessionUuid = mentoringSessionUuid;
         this.mentoringDate = mentoringDate;
