@@ -2,13 +2,13 @@ package com.multitap.feedbackquery.application;
 
 import com.multitap.feedbackquery.dto.in.FeedbackRecordRequestDto;
 import com.multitap.feedbackquery.dto.out.FeedbackRecordResponseDto;
+import com.multitap.feedbackquery.entity.FeedbackRecord;
 import com.multitap.feedbackquery.infrastructure.FeedbackRecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
@@ -19,13 +19,13 @@ public class FeedbackRecordServiceImpl implements FeedbackRecordService {
 
     @Override
     public List<FeedbackRecordResponseDto> getFeedbackScore(FeedbackRecordRequestDto feedbackRecordRequestDto) {
-        List<FeedbackRecordResponseDto> recordResponseDtos = feedbackRecordRepository.findAllFeedbackByIdAndCategoryCode(feedbackRecordRequestDto.getUuid(), feedbackRecordRequestDto.getCategoryCode())
+
+        return feedbackRecordRepository.findById(feedbackRecordRequestDto.getUuid())
+                .map(FeedbackRecord::getFeedbackScore)
                 .stream()
+                .flatMap(List::stream)
+                .filter(score -> score.getCategoryCode().equals(feedbackRecordRequestDto.getCategoryCode()))
                 .map(FeedbackRecordResponseDto::from)
                 .toList();
-
-        log.info("dto:{}", recordResponseDtos.get(0).getCategoryCode());
-
-        return recordResponseDtos;
     }
 }

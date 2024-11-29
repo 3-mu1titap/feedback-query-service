@@ -1,6 +1,5 @@
 package com.multitap.feedbackquery.dto.in;
 
-import com.multitap.feedbackquery.vo.in.FeedbackRecordRequestVo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +17,10 @@ public class FeedbackRecordRequestDto {
         this.categoryCode = categoryCode;
     }
 
-    public static FeedbackRecordRequestDto from(FeedbackRecordRequestVo feedbackRecordRequestVo) {
+    public static FeedbackRecordRequestDto from(String uuid, String categoryCode) {
         return FeedbackRecordRequestDto.builder()
-                .uuid(feedbackRecordRequestVo.getUuid())
-                .categoryCode(feedbackRecordRequestVo.getCategoryCode())
+                .uuid(uuid)
+                .categoryCode(categoryCode)
                 .build();
     }
 

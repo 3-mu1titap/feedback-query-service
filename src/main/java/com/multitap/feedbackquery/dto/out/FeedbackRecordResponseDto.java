@@ -1,8 +1,6 @@
 package com.multitap.feedbackquery.dto.out;
 
-import com.multitap.feedbackquery.dto.in.FeedbackRecordRequestDto;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
-import com.multitap.feedbackquery.entity.FeedbackRecord;
 import com.multitap.feedbackquery.vo.out.FeedbackRecordResponseVo;
 import lombok.Builder;
 import lombok.Getter;
