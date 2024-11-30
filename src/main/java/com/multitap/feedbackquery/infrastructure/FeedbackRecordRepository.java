@@ -40,18 +40,21 @@ public interface FeedbackRecordRepository extends MongoRepository<FeedbackRecord
                     "element2: { $arrayElemAt: ['$feedbackScore.element2', 0] }, " +
                     "element3: { $arrayElemAt: ['$feedbackScore.element3', 0] }, " +
                     "element4: { $arrayElemAt: ['$feedbackScore.element4', 0] }, " +
-                    "element5: { $arrayElemAt: ['$feedbackScore.element5', 0] } " +
+                    "element5: { $arrayElemAt: ['$feedbackScore.element5', 0] }, " +
+                    "mentoringDate: { $dateToString: { format: '%Y-%m-%d', date: { $arrayElemAt: ['$feedbackScore.mentoringDate', 0] } } } " + // 첫 번째 날짜 변환
                     "}, " +
                     "lastScore: { " +
                     "element1: { $arrayElemAt: ['$feedbackScore.element1', -1] }, " +
                     "element2: { $arrayElemAt: ['$feedbackScore.element2', -1] }, " +
                     "element3: { $arrayElemAt: ['$feedbackScore.element3', -1] }, " +
                     "element4: { $arrayElemAt: ['$feedbackScore.element4', -1] }, " +
-                    "element5: { $arrayElemAt: ['$feedbackScore.element5', -1] } " +
+                    "element5: { $arrayElemAt: ['$feedbackScore.element5', -1] }, " +
+                    "mentoringDate: { $dateToString: { format: '%Y-%m-%d', date: { $arrayElemAt: ['$feedbackScore.mentoringDate', -1] } } } " + // 마지막 날짜 변환
                     "} " +
                     "} }"
     })
     FeedbackFirstLastScoreDto findFirstAndLastFeedbackScore(String id, String categoryCode);
+
 }
 
 
