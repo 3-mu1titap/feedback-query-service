@@ -1,6 +1,6 @@
 package com.multitap.feedbackquery.vo.out;
 
-import com.multitap.feedbackquery.dto.out.ElementScore;
+import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FeedbackFirstLastScoreResponseVo {
 
-    private ElementScore firstScore;
-    private ElementScore lastScore;
+    private FeedbackFirstLastScoreDto.ElementScore firstScore;
+    private FeedbackFirstLastScoreDto.ElementScore lastScore;
 
     @Builder
-    public FeedbackFirstLastScoreResponseVo(ElementScore firstScore, ElementScore lastScore) {
+    public FeedbackFirstLastScoreResponseVo(FeedbackFirstLastScoreDto.ElementScore firstScore, FeedbackFirstLastScoreDto.ElementScore lastScore) {
         this.firstScore = firstScore;
         this.lastScore = lastScore;
     }

@@ -1,4 +1,4 @@
-package com.multitap.feedbackquery.kafka.consumer;
+package com.multitap.feedbackquery.common.config;
 
 import com.multitap.feedbackquery.kafka.consumer.messagein.FeedbackScoreDto;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -12,7 +12,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @EnableKafka

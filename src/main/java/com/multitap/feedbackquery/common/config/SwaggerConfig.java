@@ -1,4 +1,4 @@
-package com.multitap.feedbackquery.common;
+package com.multitap.feedbackquery.common.config;
 
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
