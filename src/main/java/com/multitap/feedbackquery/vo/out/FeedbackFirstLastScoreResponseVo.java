@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FeedbackFirstLastScoreResponseVo {
 
-    private String id;
     private FeedbackFirstLastScoreDto.ElementScore firstScore;
     private FeedbackFirstLastScoreDto.ElementScore lastScore;
 
     @Builder
-    public FeedbackFirstLastScoreResponseVo(String id, FeedbackFirstLastScoreDto.ElementScore firstScore, FeedbackFirstLastScoreDto.ElementScore lastScore) {
-        this.id = id;
+    public FeedbackFirstLastScoreResponseVo(FeedbackFirstLastScoreDto.ElementScore firstScore, FeedbackFirstLastScoreDto.ElementScore lastScore) {
         this.firstScore = firstScore;
         this.lastScore = lastScore;
     }

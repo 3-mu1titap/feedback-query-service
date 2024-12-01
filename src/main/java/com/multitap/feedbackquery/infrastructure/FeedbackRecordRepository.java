@@ -26,6 +26,7 @@ public interface FeedbackRecordRepository extends MongoRepository<FeedbackRecord
     })
     Optional<FeedbackRecord> findByIdAndCategoryCodeOrderByMentoringDateDesc(String id, String categoryCode);
 
+
     @Aggregation(pipeline = {
             "{ $match: { _id: ?0, 'feedbackScore.categoryCode': ?1 } }",
             "{ $project: { feedbackScore: { $filter: { " +
@@ -34,7 +35,6 @@ public interface FeedbackRecordRepository extends MongoRepository<FeedbackRecord
                     "cond: { $eq: ['$$score.categoryCode', ?1] } " +
                     "} } } }",
             "{ $project: { " +
-                    "id: '$_id', " +
                     "firstScore: { " +
                     "element1: { $arrayElemAt: ['$feedbackScore.element1', 0] }, " +
                     "element2: { $arrayElemAt: ['$feedbackScore.element2', 0] }, " +
@@ -54,5 +54,8 @@ public interface FeedbackRecordRepository extends MongoRepository<FeedbackRecord
                     "} }"
     })
     FeedbackFirstLastScoreDto findFirstAndLastFeedbackScore(String id, String categoryCode);
+
 }
+
+
 
