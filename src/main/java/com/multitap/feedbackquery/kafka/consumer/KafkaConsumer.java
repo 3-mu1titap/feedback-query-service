@@ -14,10 +14,17 @@ public class KafkaConsumer {
 
     private final KafkaConsumerService kafkaConsumerService;
 
-    @KafkaListener(topics = "create-feedback-score-topic", groupId = "feedback-consumer-group", containerFactory = "memberDtoListener")
+    @KafkaListener(topics = "create-feedback-score-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackScoreDtoListener")
     public void processFeedbackScore(FeedbackScoreDto feedbackScoreDto) {
         log.info("Received feedbackScoreDto :{}", feedbackScoreDto.getUuid());
         kafkaConsumerService.addFeedbackScore(FeedbackScoreRequestDto.from(feedbackScoreDto), feedbackScoreDto.getUuid());
     }
+
+//    @KafkaListener(topics = "create-feedback-score-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackScoreDtoListener")
+//    public void processFeedbackScore(FeedbackScoreDto feedbackScoreDto) {
+//        log.info("Received feedbackScoreDto :{}", feedbackScoreDto.getUuid());
+//        kafkaConsumerService.addFeedbackScore(FeedbackScoreRequestDto.from(feedbackScoreDto), feedbackScoreDto.getUuid());
+//    }
+
 
 }

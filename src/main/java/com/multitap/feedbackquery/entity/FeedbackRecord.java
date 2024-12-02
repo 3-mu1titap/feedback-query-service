@@ -1,5 +1,6 @@
 package com.multitap.feedbackquery.entity;
 
+import com.multitap.feedbackquery.dto.in.FeedbackScoreContentDto;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class FeedbackRecord {
     @Id
     private String id;
     private List<FeedbackScoreRequestDto> feedbackScore;
+    private List<FeedbackScoreContentDto> feedbackScoreContent;
 
 }

@@ -34,4 +34,5 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         // feedback score -> ai feedback-service
         kafkaProducerService.sendCreateFeedbackScore(AiFeedbackScoreDto.from(feedbackRecordRepository.findFirstAndLastFeedbackScore(uuid,feedbackScoreRequestDto.getCategoryCode()),feedbackScoreRequestDto.getCategoryCode()));
     }
+
 }
