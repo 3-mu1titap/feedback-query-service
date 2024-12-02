@@ -1,5 +1,6 @@
 package com.multitap.feedbackquery.common.config;
 
+import com.multitap.feedbackquery.kafka.consumer.messagein.FeedbackContentResponseVo;
 import com.multitap.feedbackquery.kafka.consumer.messagein.FeedbackScoreDto;
 import com.multitap.feedbackquery.vo.out.FeedbackRecordResponseVo;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,20 +39,20 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, FeedbackRecordResponseVo> feedbackRecordConsumerFactory() {
+    public ConsumerFactory<String, FeedbackContentResponseVo> feedbackContentConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:39092,localhost:49092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "feedback-consumer-group");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(FeedbackRecordResponseVo.class, false));
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(FeedbackContentResponseVo.class, false));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, FeedbackRecordResponseVo> feedbackRecordResponseVoListener() {
-        ConcurrentKafkaListenerContainerFactory<String, FeedbackRecordResponseVo> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(feedbackRecordConsumerFactory());
+    public ConcurrentKafkaListenerContainerFactory<String, FeedbackContentResponseVo> feedbackContentResponseVoListener() {
+        ConcurrentKafkaListenerContainerFactory<String, FeedbackContentResponseVo> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(feedbackContentConsumerFactory());
         return factory;
     }
 }

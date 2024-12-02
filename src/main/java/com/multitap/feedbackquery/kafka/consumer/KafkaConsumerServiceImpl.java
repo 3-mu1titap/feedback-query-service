@@ -35,4 +35,9 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         kafkaProducerService.sendCreateFeedbackScore(AiFeedbackScoreDto.from(feedbackRecordRepository.findFirstAndLastFeedbackScore(uuid,feedbackScoreRequestDto.getCategoryCode()),feedbackScoreRequestDto.getCategoryCode()));
     }
 
+//    @Override
+//    public void addFeedbackRecord(FeedbackRecordResponseVo feedbackRecordResponseDto, String uuid) {
+//
+//    }
+
 }
