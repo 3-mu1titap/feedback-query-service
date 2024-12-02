@@ -19,6 +19,6 @@ public class FeedbackRecord {
     @Id
     private String id;
     private List<FeedbackScoreRequestDto> feedbackScore;
-    private List<FeedbackScoreContentDto> feedbackContent;
+    private FeedbackScoreContentDto feedbackContent;
 
 }

@@ -31,17 +31,27 @@ public class FeedbackScoreContentDto {
                 .build();
     }
 
-    private void updateOrCreateFeedbackContent(FeedbackRecord feedbackRecord, FeedbackScoreContentDto feedbackScoreContentDto) {
-        if (feedbackRecord.getFeedbackContent() == null) {
-            feedbackRecord.setFeedbackContent(new ArrayList<>());
-        }
+    public FeedbackRecord toEntity(FeedbackScoreContentDto feedbackScoreContentDto, FeedbackRecord existedFeedbackRecord) {
+        FeedbackRecord feedbackRecord = FeedbackRecord.builder()
+                .id(existedFeedbackRecord.getId())
+                .feedbackScore(existedFeedbackRecord.getFeedbackScore())
+                .feedbackContent(new ArrayList<>())
+                .build();
         feedbackRecord.getFeedbackContent().add(feedbackScoreContentDto);
+        return feedbackRecord;
+
     }
 
+    public FeedbackRecord updateToEntity(FeedbackScoreContentDto feedbackScoreContentDto,  FeedbackRecord feedbackRecord) {
+        // 기존 feedbackContent 리스트에 새로운 피드백 추가
+        feedbackRecord.getFeedbackContent().add(feedbackScoreContentDto);
 
-    public FeedbackRecord toEntity(FeedbackScoreContentDto feedbackScoreContentDto, FeedbackRecord feedbackRecord) {
-        updateOrCreateFeedbackContent(feedbackRecord, feedbackScoreContentDto);
-        return feedbackRecord;
+        // 변경된 FeedbackRecord 반환
+        return FeedbackRecord.builder()
+                .id(feedbackRecord.getId())
+                .feedbackScore(feedbackRecord.getFeedbackScore())
+                .feedbackContent().add(feedbackScoreContentDto)
+                .build();
     }
 
 }

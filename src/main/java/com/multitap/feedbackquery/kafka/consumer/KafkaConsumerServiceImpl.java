@@ -40,22 +40,8 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
 
     @Override
     public void addFeedbackContent(FeedbackScoreContentDto feedbackScoreContentDto) {
-        log.info("응답값: {}", feedbackScoreContentDto.getContent());
 
-        FeedbackRecord feedbackRecord = feedbackRecordRepository.findById(feedbackScoreContentDto.getId())
+        feedbackRecordRepository.findFeedbackContentByIdAndCategory(feedbackScoreContentDto.getId(), feedbackScoreContentDto.getCategory())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
-
-        Optional<FeedbackRecord> existingFeedbackOptional = feedbackRecordRepository.findFeedbackContentByIdAndCategory(
-                feedbackScoreContentDto.getId(), feedbackScoreContentDto.getCategory()
-        );
-
-        FeedbackRecord updatedFeedback;
-
-        if (existingFeedbackOptional.isPresent()) {
-            updatedFeedback = feedbackScoreContentDto.toEntity(feedbackScoreContentDto, existingFeedbackOptional.get());
-        } else {
-            updatedFeedback = feedbackScoreContentDto.toEntity(feedbackScoreContentDto, feedbackRecord);
-        }
-        feedbackRecordRepository.save(updatedFeedback);
     }
 }
