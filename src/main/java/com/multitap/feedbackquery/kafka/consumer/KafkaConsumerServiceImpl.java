@@ -1,5 +1,8 @@
 package com.multitap.feedbackquery.kafka.consumer;
 
+import com.multitap.feedbackquery.common.exception.BaseException;
+import com.multitap.feedbackquery.common.response.BaseResponseStatus;
+import com.multitap.feedbackquery.dto.in.FeedbackScoreContentDto;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
 import com.multitap.feedbackquery.entity.FeedbackRecord;
 import com.multitap.feedbackquery.infrastructure.FeedbackRecordRepository;
@@ -32,12 +35,27 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         }
 
         // feedback score -> ai feedback-service
-        kafkaProducerService.sendCreateFeedbackScore(AiFeedbackScoreDto.from(feedbackRecordRepository.findFirstAndLastFeedbackScore(uuid,feedbackScoreRequestDto.getCategoryCode()),feedbackScoreRequestDto.getCategoryCode()));
+        kafkaProducerService.sendCreateFeedbackScore(AiFeedbackScoreDto.from(feedbackRecordRepository.findFirstAndLastFeedbackScore(uuid, feedbackScoreRequestDto.getCategoryCode()), feedbackScoreRequestDto.getCategoryCode()));
     }
 
-//    @Override
-//    public void addFeedbackRecord(FeedbackRecordResponseVo feedbackRecordResponseDto, String uuid) {
-//
-//    }
+    @Override
+    public void addFeedbackContent(FeedbackScoreContentDto feedbackScoreContentDto) {
+        log.info("응답값: {}", feedbackScoreContentDto.getContent());
 
+        FeedbackRecord feedbackRecord = feedbackRecordRepository.findById(feedbackScoreContentDto.getId())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NO_EXIST_MEMBER_INFO));
+
+        Optional<FeedbackRecord> existingFeedbackOptional = feedbackRecordRepository.findFeedbackContentByIdAndCategory(
+                feedbackScoreContentDto.getId(), feedbackScoreContentDto.getCategory()
+        );
+
+        FeedbackRecord updatedFeedback;
+
+        if (existingFeedbackOptional.isPresent()) {
+            updatedFeedback = feedbackScoreContentDto.toEntity(feedbackScoreContentDto, existingFeedbackOptional.get());
+        } else {
+            updatedFeedback = feedbackScoreContentDto.toEntity(feedbackScoreContentDto, feedbackRecord);
+        }
+        feedbackRecordRepository.save(updatedFeedback);
+    }
 }

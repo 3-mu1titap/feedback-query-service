@@ -13,6 +13,10 @@ import java.util.Optional;
 @Repository
 public interface FeedbackRecordRepository extends MongoRepository<FeedbackRecord, String> {
 
+    @Query("{ 'id': ?0, 'feedbackContent': { $elemMatch: { 'category': ?1 } } }")
+    Optional<FeedbackRecord> findFeedbackContentByIdAndCategory(String id, String category);
+
+
     @Query("{ 'id': ?0, 'feedbackScore.categoryCode': ?1 }")
     @Aggregation(pipeline = {
             "{ $match: { 'id': ?0 } }",

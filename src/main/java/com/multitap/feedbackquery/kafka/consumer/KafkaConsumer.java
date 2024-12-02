@@ -1,5 +1,6 @@
 package com.multitap.feedbackquery.kafka.consumer;
 
+import com.multitap.feedbackquery.dto.in.FeedbackScoreContentDto;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
 import com.multitap.feedbackquery.kafka.consumer.messagein.FeedbackContentResponseVo;
 import com.multitap.feedbackquery.kafka.consumer.messagein.FeedbackScoreDto;
@@ -25,6 +26,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = "create-feedback-record-gpt-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackContentResponseVoListener")
     public void processFeedbackRecord(FeedbackContentResponseVo feedbackContentResponseVo) {
         log.info("Received feedbackContentResponseVo :{}", feedbackContentResponseVo.getUuid());
+        kafkaConsumerService.addFeedbackContent(FeedbackScoreContentDto.from(feedbackContentResponseVo));
 
     }
 
