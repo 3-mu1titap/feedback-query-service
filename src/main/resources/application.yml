@@ -8,12 +8,21 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://tnbin98:1q2w3e4r@subin.elho5.mongodb.net/member-query?retryWrites=true&w=majority
+      database: member-query
 
-  kafka:
-    bootstrap-servers: localhost:9092 # Kafka 브로커 주소
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer # JSON 대신 String으로 지정
+
+kafka:
+  cluster:
+    uri: "43.200.30.178:29092,43.200.30.178:39092,43.200.30.178:49092"
+
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  consumer:
+    group-id: feedback-consumer-group # 소비자 그룹 ID
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 
 springdoc:

@@ -28,15 +28,15 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .addSecurityItem(securityRequirement)
                 .components(components)
-                .addServersItem(new Server().url("/member-query-service"))
+                .addServersItem(new Server().url("/feedback-query-service"))
                 .addServersItem(new Server().url("/"))
                 .info(apiInfo());
     }
 
     private Info apiInfo() {
         return new Info()
-                .title("MEMBER QUERY SERVICE")
-                .description("MEMBER QUERY SERVICE Swagger UI")
+                .title("FEEDBACK QUERY SERVICE")
+                .description("FEEDBACK QUERY SERVICE Swagger UI")
                 .version("1.0.0");
     }
 }
