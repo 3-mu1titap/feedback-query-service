@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +60,7 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
         // 업데이트 객체 생성
         Update update = new Update();
 
-        if (existingRecord != null) {
+        if (existingRecord != null && existingRecord.getFeedbackContent() != null) {
             // 카테고리가 일치하는 피드백 내용이 있는지 확인
             boolean categoryExists = existingRecord.getFeedbackContent().stream()
                     .anyMatch(content -> content.getCategory().equals(feedbackScoreContentDto.getCategory()));
@@ -69,16 +70,17 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
                 update.set("feedbackContent.$[elem].content", feedbackScoreContentDto.getContent())
                         .filterArray(Criteria.where("elem.category").is(feedbackScoreContentDto.getCategory()));
             } else {
-                // 해당 카테고리가 없으면 새로운 피드백 추가 (기존 항목은 그대로 두고, 새 항목만 추가)
+                // 해당 카테고리가 없으면 새로운 피드백 추가
                 update.push("feedbackContent", feedbackScoreContentDto);
             }
         } else {
-            // 기존 레코드가 없으면 새로운 피드백 추가
-            update.push("feedbackContent", feedbackScoreContentDto);
+            // 기존 레코드가 없거나 feedbackContent가 null인 경우
+            // feedbackContent 필드를 새로운 배열로 초기화
+            update.set("feedbackContent", Arrays.asList(feedbackScoreContentDto));
         }
 
         // MongoDB에 업데이트 실행
-        mongoTemplate.updateFirst(updateQuery, update, FeedbackRecord.class);
+        mongoTemplate.upsert(updateQuery, update, FeedbackRecord.class);
     }
 
 }
