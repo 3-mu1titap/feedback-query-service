@@ -1,6 +1,5 @@
 package com.multitap.feedbackquery.kafka.consumer;
 
-import com.mongodb.client.result.UpdateResult;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreContentDto;
 import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
 import com.multitap.feedbackquery.entity.FeedbackRecord;

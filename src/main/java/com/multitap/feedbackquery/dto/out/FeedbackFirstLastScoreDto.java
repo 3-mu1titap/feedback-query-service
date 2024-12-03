@@ -18,6 +18,7 @@ public class FeedbackFirstLastScoreDto {
         this.id = id;
         this.firstScore = firstScore;
         this.lastScore = lastScore;
+
     }
 
     public static FeedbackFirstLastScoreResponseVo toVo(FeedbackFirstLastScoreDto dto) {

@@ -1,7 +1,5 @@
 package com.multitap.feedbackquery.kafka.consumer.messagein;
 
-import com.multitap.feedbackquery.dto.in.FeedbackScoreRequestDto;
-import com.multitap.feedbackquery.entity.FeedbackRecord;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
