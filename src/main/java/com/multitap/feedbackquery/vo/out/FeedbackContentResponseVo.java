@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 public class FeedbackContentResponseVo {
 
     private FeedbackFirstLastScoreDto feedbackFirstLastScoreDto;
-    private String feedbackContentDto;
+    private String feedbackContent;
 
     @Builder
-    public FeedbackContentResponseVo(FeedbackFirstLastScoreDto feedbackFirstLastScoreDto, String feedbackContentDto) {
+    public FeedbackContentResponseVo(FeedbackFirstLastScoreDto feedbackFirstLastScoreDto, String feedbackContent) {
         this.feedbackFirstLastScoreDto = feedbackFirstLastScoreDto;
-        this.feedbackContentDto = feedbackContentDto;
+        this.feedbackContent = feedbackContent;
     }
 }
