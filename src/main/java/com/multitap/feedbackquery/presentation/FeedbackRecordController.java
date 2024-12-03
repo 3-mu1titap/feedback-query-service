@@ -4,10 +4,8 @@ import com.multitap.feedbackquery.application.FeedbackRecordService;
 import com.multitap.feedbackquery.common.response.BaseResponse;
 import com.multitap.feedbackquery.dto.in.FeedbackRecordRequestDto;
 import com.multitap.feedbackquery.dto.out.FeedbackContentResponseDto;
-import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import com.multitap.feedbackquery.dto.out.FeedbackRecordResponseDto;
 import com.multitap.feedbackquery.vo.out.FeedbackContentResponseVo;
-import com.multitap.feedbackquery.vo.out.FeedbackFirstLastScoreResponseVo;
 import com.multitap.feedbackquery.vo.out.FeedbackRecordResponseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,6 +38,6 @@ public class FeedbackRecordController {
     @GetMapping("/feedback-graph/{categoryCode}")
     public BaseResponse<FeedbackContentResponseVo> getFeedbackGraph(@RequestHeader("userUuid") String uuid, @PathVariable String categoryCode) {
         FeedbackContentResponseDto feedbackContentResponseDto = feedbackRecordService.getFeedbackFirstLastScoreAndContent(FeedbackRecordRequestDto.from(uuid, categoryCode));
-        return new BaseResponse<>(feedbackContentResponseDto.toVo(feedbackContentResponseDto));
+        return new BaseResponse<>(feedbackContentResponseDto.toVo());
     }
 }

@@ -18,10 +18,10 @@ public class FeedbackContentResponseDto {
         this.feedbackContentDto = feedbackContentDto;
     }
 
-    public FeedbackContentResponseVo toVo(FeedbackContentResponseDto feedbackContentResponseDto) {
+    public FeedbackContentResponseVo toVo() {
         return FeedbackContentResponseVo.builder()
                 .feedbackFirstLastScoreDto(feedbackFirstLastScoreDto)
-                .feedbackContentDto(feedbackContentDto)
+                .feedbackContent(feedbackContentDto)
                 .build();
     }
 }

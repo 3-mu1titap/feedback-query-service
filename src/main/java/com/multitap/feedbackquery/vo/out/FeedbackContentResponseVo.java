@@ -1,6 +1,5 @@
 package com.multitap.feedbackquery.vo.out;
 
-import com.multitap.feedbackquery.dto.out.FeedbackContentDto;
 import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import lombok.Builder;
 import lombok.Getter;
