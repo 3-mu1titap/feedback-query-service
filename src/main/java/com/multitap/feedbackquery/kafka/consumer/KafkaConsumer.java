@@ -26,7 +26,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = "create-feedback-record-gpt-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackContentResponseVoListener")
     public void processFeedbackRecord(FeedbackContentResponseVo feedbackContentResponseVo) {
         log.info("Received feedbackContentResponseVo :{}", feedbackContentResponseVo.getUuid());
-        kafkaConsumerService.addFeedbackContent(FeedbackScoreContentDto.from(feedbackContentResponseVo));
+        kafkaConsumerService.addFeedbackContent(FeedbackScoreContentDto.from(feedbackContentResponseVo), feedbackContentResponseVo.getUuid());
 
     }
 
