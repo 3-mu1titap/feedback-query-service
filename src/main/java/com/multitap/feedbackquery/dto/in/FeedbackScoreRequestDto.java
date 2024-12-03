@@ -64,6 +64,7 @@ public class FeedbackScoreRequestDto {
                 .id(uuid)
                 .feedbackScore(new ArrayList<>())
                 .build();
+
         feedbackRecord.getFeedbackScore().add(feedbackScoreRequestDto);
         return feedbackRecord;
     }

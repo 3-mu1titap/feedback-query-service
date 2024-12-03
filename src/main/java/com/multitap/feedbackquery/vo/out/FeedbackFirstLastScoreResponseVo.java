@@ -12,6 +12,7 @@ public class FeedbackFirstLastScoreResponseVo {
     private FeedbackFirstLastScoreDto.ElementScore firstScore;
     private FeedbackFirstLastScoreDto.ElementScore lastScore;
 
+
     @Builder
     public FeedbackFirstLastScoreResponseVo(FeedbackFirstLastScoreDto.ElementScore firstScore, FeedbackFirstLastScoreDto.ElementScore lastScore) {
         this.firstScore = firstScore;

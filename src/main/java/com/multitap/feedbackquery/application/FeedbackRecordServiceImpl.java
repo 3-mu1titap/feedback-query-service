@@ -1,5 +1,8 @@
 package com.multitap.feedbackquery.application;
+
 import com.multitap.feedbackquery.dto.in.FeedbackRecordRequestDto;
+import com.multitap.feedbackquery.dto.out.FeedbackContentDto;
+import com.multitap.feedbackquery.dto.out.FeedbackContentResponseDto;
 import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import com.multitap.feedbackquery.dto.out.FeedbackRecordResponseDto;
 import com.multitap.feedbackquery.entity.FeedbackRecord;
@@ -9,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +32,14 @@ public class FeedbackRecordServiceImpl implements FeedbackRecordService {
     }
 
     @Override
-    public FeedbackFirstLastScoreDto getFeedbackFirstLastScore(FeedbackRecordRequestDto feedbackRecordRequestDto) {
-        return feedbackRecordRepository.findFirstAndLastFeedbackScore(feedbackRecordRequestDto.getUuid(), feedbackRecordRequestDto.getCategoryCode());
+    public FeedbackContentResponseDto getFeedbackFirstLastScoreAndContent(FeedbackRecordRequestDto feedbackRecordRequestDto) {
+        FeedbackFirstLastScoreDto feedbackFirstLastScoreDto = feedbackRecordRepository.findFirstAndLastFeedbackScore(feedbackRecordRequestDto.getUuid(), feedbackRecordRequestDto.getCategoryCode());
+        String content = feedbackRecordRepository.findFeedbackContentByIdAndCategory(feedbackRecordRequestDto.getUuid(), feedbackRecordRequestDto.getCategoryCode());
+        log.info("컨텐트: {}", content);
+        return FeedbackContentResponseDto.builder()
+                .feedbackFirstLastScoreDto(feedbackFirstLastScoreDto)
+                .feedbackContentDto(content)
+                .build();
     }
 }
 

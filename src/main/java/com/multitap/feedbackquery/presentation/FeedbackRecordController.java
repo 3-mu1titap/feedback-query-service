@@ -3,8 +3,10 @@ package com.multitap.feedbackquery.presentation;
 import com.multitap.feedbackquery.application.FeedbackRecordService;
 import com.multitap.feedbackquery.common.response.BaseResponse;
 import com.multitap.feedbackquery.dto.in.FeedbackRecordRequestDto;
+import com.multitap.feedbackquery.dto.out.FeedbackContentResponseDto;
 import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import com.multitap.feedbackquery.dto.out.FeedbackRecordResponseDto;
+import com.multitap.feedbackquery.vo.out.FeedbackContentResponseVo;
 import com.multitap.feedbackquery.vo.out.FeedbackFirstLastScoreResponseVo;
 import com.multitap.feedbackquery.vo.out.FeedbackRecordResponseVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,10 +36,10 @@ public class FeedbackRecordController {
         return new BaseResponse<>(feedbackRecordResponseVoList);
     }
 
-    @Operation(summary = "피드백 그래프 값 조회", description = "카테고리별 피드백 첫 점수와 최근 마지막 점수 값을 조회합니다.")
+    @Operation(summary = "피드백 그래프 값, 볼팡이 코멘트 조회", description = "카테고리별 피드백 첫 점수와 최근 마지막 점수와 볼팡이 코멘트를 조회합니다.")
     @GetMapping("/feedback-graph/{categoryCode}")
-    public BaseResponse<FeedbackFirstLastScoreResponseVo> getFeedbackGraph(@RequestHeader("userUuid") String uuid, @PathVariable String categoryCode) {
-        FeedbackFirstLastScoreDto feedbackFirstLastScoreDto = feedbackRecordService.getFeedbackFirstLastScore(FeedbackRecordRequestDto.from(uuid, categoryCode));
-        return new BaseResponse<>(FeedbackFirstLastScoreDto.toVo(feedbackFirstLastScoreDto));
+    public BaseResponse<FeedbackContentResponseVo> getFeedbackGraph(@RequestHeader("userUuid") String uuid, @PathVariable String categoryCode) {
+        FeedbackContentResponseDto feedbackContentResponseDto = feedbackRecordService.getFeedbackFirstLastScoreAndContent(FeedbackRecordRequestDto.from(uuid, categoryCode));
+        return new BaseResponse<>(feedbackContentResponseDto.toVo(feedbackContentResponseDto));
     }
 }
