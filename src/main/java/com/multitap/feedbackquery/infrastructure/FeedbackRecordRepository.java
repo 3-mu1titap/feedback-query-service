@@ -1,7 +1,5 @@
 package com.multitap.feedbackquery.infrastructure;
 
-import com.multitap.feedbackquery.dto.in.FeedbackScoreContentDto;
-import com.multitap.feedbackquery.dto.out.FeedbackContentDto;
 import com.multitap.feedbackquery.dto.out.FeedbackFirstLastScoreDto;
 import com.multitap.feedbackquery.entity.FeedbackRecord;
 import org.springframework.data.mongodb.repository.Aggregation;

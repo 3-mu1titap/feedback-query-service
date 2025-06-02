@@ -17,12 +17,14 @@ public class KafkaConsumer {
 
     private final KafkaConsumerService kafkaConsumerService;
 
+    //멘토가 피드백 점수 부여한 값을 전달 받아서 저장 함
     @KafkaListener(topics = "create-feedback-score-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackScoreDtoListener")
     public void processFeedbackScore(FeedbackScoreDto feedbackScoreDto) {
         log.info("Received feedbackScoreDto :{}", feedbackScoreDto.getUuid());
         kafkaConsumerService.addFeedbackScore(FeedbackScoreRequestDto.from(feedbackScoreDto), feedbackScoreDto.getUuid());
     }
 
+    // ai 에서 피드백 받은 값을 컨슘 받음
     @KafkaListener(topics = "create-feedback-record-gpt-topic", groupId = "feedback-consumer-group", containerFactory = "feedbackContentResponseVoListener")
     public void processFeedbackRecord(FeedbackContentResponseVo feedbackContentResponseVo) {
         log.info("Received feedbackContentResponseVo :{}", feedbackContentResponseVo.getUuid());

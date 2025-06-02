@@ -7,23 +7,21 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb+srv://tnbin98:1q2w3e4r@subin.elho5.mongodb.net/member-query?retryWrites=true&w=majority
-      database: member-query
-
+      uri: mongodb+srv://tnbin98:Z8qFh4dw53Mu4yTW@adaptors.wmxmod4.mongodb.net
+      database: test
 
 kafka:
   cluster:
-    uri: "43.200.30.178:29092,43.200.30.178:39092,43.200.30.178:49092"
+    uri: localhost:29092
 
   producer:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
   consumer:
-    group-id: feedback-consumer-group # 소비자 그룹 ID
+    group-id: feedback-consumer-group
     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
 
 springdoc:
   api-docs:
